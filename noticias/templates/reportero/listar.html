@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block cuerpo %}
+
+<div class="container mt-3">
+
+    <table class="table table-light table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>Edad</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in reporteros %}
+            <tr>
+                <td>{{ r.first_name }}</td>
+                <td>{{ r.last_name }}</td>
+                <td>{{ r.telefono }}</td>
+                <td>{{ r.email }}</td>
+                <td>{{ r.get_edad }}</td>
+                <td> <form>
+                    <a href='/reportero_editar/{{ r.id }}'>
+                        <img width="48" height="48" src="https://img.icons8.com/color/48/edit--v1.png" alt="edit--v1"/>
+                    </a>
+                </form> </td>
+                <td> <form>
+                    <a href='/reportero_baja/{{ r.id }}'>
+                        <img width="48" height="48" src="https://img.icons8.com/color/48/delete-forever.png" alt="delete-forever"/>
+                    </a>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock %}
+<script>
+function openLeftMenu() {
+  document.getElementById("leftMenu").style.display = "block";
+}
+
+function closeLeftMenu() {
+  document.getElementById("leftMenu").style.display = "none";
+}
+</script>
