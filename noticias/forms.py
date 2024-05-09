@@ -4,8 +4,7 @@ from django import forms
 from django.core.validators import RegexValidator
 from  django.forms import ModelForm
 
-from noticias.models import Reportero
-
+from noticias.models import Reportero, Noticia
 
 
 class ReporteroForm(ModelForm):
@@ -110,3 +109,55 @@ class ReporteroForm(ModelForm):
             "password":"Contraseña",
             "fecha_nacimiento":"Nacimiento"
         }
+
+
+class NoticiaForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(NoticiaForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('titulo', css_class='form-group col-md-3'),
+                 Column('fecha', css_class='form-group col-md-3')
+            ),
+            Row(
+                Column('descripcion',css_class='form-group col-md-6')
+                #css_class="form-row"
+            ),
+            Row(
+                Column('reportero', css_class='form-group col-md-4'),
+                Column('referencias', css_class='form-group col-md-2')
+            ),
+            Submit('submit','Guardar')
+        )
+    class Meta:
+        model = Noticia
+        fields = ['titulo',
+                  'fecha',
+                  'descripcion',
+                  'reportero',
+                  'referencias']
+        widgets = {
+            "titulo": forms.TextInput,
+            "fecha": forms.DateInput(
+                format="%Y-%m-%d",
+                attrs={
+                    'type': 'date',
+                    'class': 'form-control',
+                    'placeholder': 'seleccione una fecha'
+                }
+            ),
+            "descripcion": forms.Textarea,
+            "reportero": forms.TextInput,#ModelChoiceField(queryset=Reportero.objects.all())
+            "referencias": forms.TextInput
+        }
+        labels = {
+            "titulo": "Titulo",
+            "fecha": "Fecha",
+            "descripcion": "Contenido",
+            "reportero": "Nombre del reportero",
+            "referencias": "Referencia"
+        }
+
+

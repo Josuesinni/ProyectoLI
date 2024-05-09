@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block cuerpo %}
+
+    {% for n in noticias %}
+        <div>
+        <h1>{{ n.titulo }}</h1>
+        <h4> {{ n.fecha }}</h4>
+        <p>{{ n.descripcion|linebreaks }}</p>
+            <p><b>Articulo por:</b>{{ n.get_reportero }}</p>
+            <a>{{ n.referencias }}</a>
+        </div>
+    {% endfor %}
+
 {% endblock %}
 
 {% block codigo %}

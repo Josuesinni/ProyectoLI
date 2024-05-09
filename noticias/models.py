@@ -29,3 +29,15 @@ class Reportero(User, models.Model):
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
         self._password = raw_password
+
+class Noticia(models.Model):
+    id = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=255)
+    fecha = models.DateField()
+    descripcion = models.TextField()
+    reportero = models.IntegerField()
+    referencias = models.CharField(max_length=255)
+    def get_reportero(self):
+        reportero = Reportero.objects.filter(id=self.reportero).first()
+        return reportero
+
