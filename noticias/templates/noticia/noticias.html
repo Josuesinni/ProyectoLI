@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block cuerpo %}
+
+<div class="container mt-3">
+
+    <table class="table table-light table-hover">
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Fecha</th>
+            <th>Descripcion</th>
+            <th>Autor</th>
+            <th>Bibliografia</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in noticias %}
+            <tr>
+                <td>{{ n.titulo }}</td>
+                <td>{{ n.fecha }}</td>
+                <td>{{ n.descripcion }}</td>
+                <td> {{ n.get_reportero }}</td>
+                <td>{{ n.referencias }}</td>
+                <td> <form>
+                    <a href='/noticia_editar/{{ n.id }}'>
+                        <img width="48" height="48" src="https://img.icons8.com/color/48/edit--v1.png" alt="edit--v1"/>
+                    </a>
+                </form> </td>
+                <td> <form>
+                    <a href='/noticia_baja/{{ n.id }}'>
+                        <img width="48" height="48" src="https://img.icons8.com/color/48/delete-forever.png" alt="delete-forever"/>
+                    </a>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock %}
+<script>
+function openLeftMenu() {
+  document.getElementById("leftMenu").style.display = "block";
+}
+
+function closeLeftMenu() {
+  document.getElementById("leftMenu").style.display = "none";
+}
+</script>
