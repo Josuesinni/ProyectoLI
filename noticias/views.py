@@ -222,7 +222,7 @@ class NoticiaEdit(View):
         form = NoticiaForm(request.POST, instance=noticia)
         if form.is_valid():
             form.save()
-            return redirect('reporteros')
+            return redirect('noticia')
         cdx = {
             'titulo': 'Error al editar Noticia',
             'form': form
